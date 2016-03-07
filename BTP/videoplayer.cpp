@@ -1,4 +1,5 @@
 #include "videoplayer.h"
+
 #include <QtWidgets>
 #include <qvideowidget.h>
 #include <qvideosurfaceformat.h>
@@ -59,9 +60,10 @@ VideoPlayer::~VideoPlayer()
 void VideoPlayer::openFile()
 {
     errorLabel->setText("");
+
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Movie"),QDir::homePath());
-    if(!fileName.isEmpty())
-    {
+
+    if (!fileName.isEmpty()) {
         mediaPlayer.setMedia(QUrl::fromLocalFile(fileName));
         playButton->setEnabled(true);
     }
@@ -69,8 +71,7 @@ void VideoPlayer::openFile()
 
 void VideoPlayer::play()
 {
-    switch(mediaPlayer.state())
-    {
+    switch(mediaPlayer.state()) {
     case QMediaPlayer::PlayingState:
         mediaPlayer.pause();
         break;
@@ -82,8 +83,7 @@ void VideoPlayer::play()
 
 void VideoPlayer::mediaStateChanged(QMediaPlayer::State state)
 {
-    switch(state)
-    {
+    switch(state) {
     case QMediaPlayer::PlayingState:
         playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
         break;

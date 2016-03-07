@@ -1,46 +1,80 @@
-#include "videoplayer.h"
-#include <QtWidgets/QApplication>
-#include <bits/stdc++.h>
-#include <QDesktopWidget>
-using namespace std ;
-int main(int argc, char *argv[])
+/****************************************************************************
+**
+** Copyright (C) 2015 The Qt Company Ltd.
+** Contact: http://www.qt.io/licensing/
+**
+** This file is part of the examples of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:BSD$
+** You may use this file under the terms of the BSD license as follows:
+**
+** "Redistribution and use in source and binary forms, with or without
+** modification, are permitted provided that the following conditions are
+** met:
+**   * Redistributions of source code must retain the above copyright
+**     notice, this list of conditions and the following disclaimer.
+**   * Redistributions in binary form must reproduce the above copyright
+**     notice, this list of conditions and the following disclaimer in
+**     the documentation and/or other materials provided with the
+**     distribution.
+**   * Neither the name of The Qt Company Ltd nor the names of its
+**     contributors may be used to endorse or promote products derived
+**     from this software without specific prior written permission.
+**
+**
+** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+**
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+#ifndef VIDEOPLAYER_H
+#define VIDEOPLAYER_H
+
+#include <qmediaplayer.h>
+
+#include <QtGui/QMovie>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+class QAbstractButton;
+class QSlider;
+class QLabel;
+QT_END_NAMESPACE
+
+class VideoPlayer : public QWidget
 {
-    QApplication app(argc, argv);
-   // QWidget window ;
-    QRect rec = QApplication::desktop()->screenGeometry();
-    int height = rec.height();
-    int width = rec.width();
-    //window.resize(height,width);
-    //window.show();
-    //cout << height << " " << width << "\n" ;
-    int number_of_videos ;
-    cout << "Please Select the number of videos\n" ;
-    cin >> number_of_videos ;
-    int hor,ver;
-    cout << "Please mention the form of grid you would like:" << endl;
-    cin >> hor >> ver;
-    int height_of_each_video = height/ver ;
-    int width_of_each_video = width/hor ;
-    cout << height << " " << width << endl ;
-    cout << height_of_each_video << " " << width_of_each_video << endl  ;
-    VideoPlayer array_of_players[number_of_videos] ;
-    int x=0,y=0,count1=0 ;
-    while(ver)
-    {
-        x=0;
-        for(int i=0;i<hor;i++)
-        {
-            cout << "printing" << " " << x << " " << y << endl;
-            array_of_players[count1].resize(width_of_each_video,height_of_each_video);
-            array_of_players[count1].move(x,y);
-            x+=width_of_each_video;
-            array_of_players[count1].setFixedHeight(height_of_each_video);
-            array_of_players[count1].setFixedWidth(width_of_each_video);
-            array_of_players[count1].show() ;
-            count1++ ;
-        }
-        ver--;
-        y+=height_of_each_video;
-    }
-    return app.exec();
-}
+    Q_OBJECT
+public:
+    VideoPlayer(QWidget *parent = 0);
+    ~VideoPlayer();
+
+public slots:
+    void openFile();
+    void play();
+
+private slots:
+    void mediaStateChanged(QMediaPlayer::State state);
+    void positionChanged(qint64 position);
+    void durationChanged(qint64 duration);
+    void setPosition(int position);
+    void handleError();
+
+private:
+    QMediaPlayer mediaPlayer;
+    QAbstractButton *playButton;
+    QSlider *positionSlider;
+    QLabel *errorLabel;
+};
+
+#endif
