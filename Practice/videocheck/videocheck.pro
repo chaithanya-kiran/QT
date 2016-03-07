@@ -1,20 +1,17 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2016-03-07T21:16:41
-#
-#-------------------------------------------------
-
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-TARGET = videocheck
 TEMPLATE = app
+TARGET = videowidget
 
+QT += multimedia multimediawidgets
 
-SOURCES += main.cpp\
-        mainwindow.cpp
+HEADERS = \
+    videoplayer.h
 
-HEADERS  += mainwindow.h
+SOURCES = \
+    main.cpp \
+    videoplayer.cpp
 
-FORMS    += mainwindow.ui
+target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/videowidget
+INSTALLS += target
+
+QT+=widgets
+
