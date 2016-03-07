@@ -1,5 +1,4 @@
-#include "mainwindow.h"
-
+#include "videoplayer.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
@@ -8,7 +7,9 @@ int main(int argc, char *argv[])
 
     VideoPlayer player;
     player.resize(320, 240);
-    player.show();
+//    player.show();
 
+    QMediaPlayer *player = new QMediaPlayer;
+    player->show();
     return app.exec();
 }

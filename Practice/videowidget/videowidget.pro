@@ -14,4 +14,3 @@ target.path = $$[QT_INSTALL_EXAMPLES]/multimediawidgets/videowidget
 INSTALLS += target
 
 QT+=widgets
-
