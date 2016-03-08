@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2016-03-08T22:42:10
+# Project created by QtCreator 2015-06-12T19:03:55
 #
 #-------------------------------------------------
 
@@ -8,13 +8,16 @@ QT       += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = player1
+TARGET = videogui
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        dialog.cpp
+        mainwindow.cpp
 
-HEADERS  += dialog.h
+HEADERS  += mainwindow.h
 
-FORMS    += dialog.ui
+FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

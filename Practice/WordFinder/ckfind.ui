@@ -39,12 +39,7 @@
     </layout>
    </item>
   </layout>
-  <zorder>label</zorder>
-  <zorder>lineEdit</zorder>
-  <zorder>lineEdit</zorder>
   <zorder>textEdit</zorder>
-  <zorder>lineEdit</zorder>
-  <zorder>goButton</zorder>
   <zorder></zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
