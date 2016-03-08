@@ -17,15 +17,20 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QWidget *window = new QWidget;
     int m,n;
+
     //qDebug() << "hello ck size of grid you would like?" << endl;
     //cout << "ck grid?" << endl;
     //cin >> m;
     //qDebug() << m << endl;
+
     QSpinBox *spinner = new QSpinBox;
     spinner->setRange(1,100);
     spinner->setValue(50);
+    spinner->setGeometry(10,40,180,30);
+
     QSlider *slider = new QSlider(Qt::Horizontal);
     slider->setRange(1,100);
+
     QObject::connect(spinner,SIGNAL(valueChanged(int)),slider,SLOT(setValue(int)));
     QObject::connect(slider,SIGNAL(valueChanged(int)),spinner,SLOT(setValue(int)));
 
